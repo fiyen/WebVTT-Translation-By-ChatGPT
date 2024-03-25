@@ -1,0 +1,1 @@
+A tool to translate WebVTT files from English to Chinese.
