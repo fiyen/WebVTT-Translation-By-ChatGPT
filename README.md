@@ -7,8 +7,11 @@ pip install -r requirements.txt
 ```
 in the terminal.
 
-Secondly, copy `.env.example` and rename it to `.env`, and add `APIKEY` and `BASEURL` in `.env`. Note that if you use the api from openai, the `BASEURL` is `https://api.openai.com/v1`, don't forget to add `\v1`.
-Thirdly, change the value of the file name `subtitle_file` to the path your `.vtt` name locates, and run the following command:
+Secondly, copy `.env.example` and rename it to `.env`, and add `APIKEY` and `BASEURL` in `.env`. Note that if you use the api from openai, the `BASEURL` is `https://api.openai.com/v1`, don't forget to add `/v1`.
+
+Thirdly, change the value of the file name `subtitle_file` to the path your `.vtt` file locates, and run the following command:
 ```
 python main.py
 ```
+
+Then you will get a new `.vtt` file with the name same as the source `.vtt` file but contains an extented content of `-translated`.
