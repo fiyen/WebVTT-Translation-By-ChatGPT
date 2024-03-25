@@ -1,3 +1,4 @@
 # all vtt files
 *.vtt
 .env
+.mp4
