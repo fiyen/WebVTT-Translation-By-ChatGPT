@@ -1,0 +1,3 @@
+# all vtt files
+*.vtt
+.env
