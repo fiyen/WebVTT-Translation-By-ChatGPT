@@ -1,7 +1,7 @@
 import cv2
 import os
 import argparse
-import rarfile
+import zipfile
 import shutil
 
 def extract_frames(video_path, output_folder):
@@ -25,18 +25,20 @@ def extract_frames(video_path, output_folder):
     vidcap.release()
     print(f"共提取了 {count} 帧")
 
-def create_rar(output_folder, archive_name):
-    # 创建RAR文件
-    with rarfile.RarFile(archive_name, 'w') as rf:
+def create_zip(output_folder, archive_name):
+    # 创建ZIP文件
+    with zipfile.ZipFile(archive_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, _, files in os.walk(output_folder):
             for file in files:
-                rf.write(os.path.join(root, file), arcname=file)
+                zipf.write(os.path.join(root, file),
+                           arcname=os.path.relpath(os.path.join(root, file),
+                                                   os.path.join(output_folder, '..')))
     print(f"已保存为 {archive_name}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Extract frames from video and save to RAR file")
+    parser = argparse.ArgumentParser(description="Extract frames from video and save to ZIP file")
     parser.add_argument('--file', required=True, help='Path to the video file')
-    parser.add_argument('--save_file', required=True, help='Path to the output RAR file')
+    parser.add_argument('--save_file', required=True, help='Path to the output ZIP file')
 
     args = parser.parse_args()
 
@@ -48,8 +50,8 @@ def main():
     # 提取帧
     extract_frames(video_path, output_folder)
     
-    # 创建RAR文件
-    create_rar(output_folder, save_file)
+    # 创建ZIP文件
+    create_zip(output_folder, save_file)
     
     # 删除临时文件夹
     shutil.rmtree(output_folder)
