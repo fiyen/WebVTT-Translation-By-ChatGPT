@@ -25,7 +25,7 @@ def main():
     # 创建argparse解析器
     parser = argparse.ArgumentParser(description='Merge video and subtitle files.')
     # 添加--mp4参数
-    parser.add_argument('--mp4', required=True, help='The input video file path.')
+    parser.add_argument('--video', required=True, help='The input video file path.')
     # 添加--subtitle参数
     parser.add_argument('--subtitle', required=True, help='The input subtitle file path.')
     
@@ -33,7 +33,7 @@ def main():
     args = parser.parse_args()
 
     # 执行合并操作
-    merge_video_subtitle(args.mp4, args.subtitle)
+    merge_video_subtitle(args.video, args.subtitle)
 
 
 if __name__ == '__main__':

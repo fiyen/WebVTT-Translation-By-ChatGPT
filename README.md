@@ -78,7 +78,28 @@ After translating subtitle, you can directly merge this subtitle to .mp4 file wh
 After `ffmpeg` is installed, run the following commands to merge .mp4 and its translated subtitle:
 
 ```
-python merge.py --mp4 {XXX.mp4} --subtitle {XXX.vtt}
+python merge.py --video {XXX.mp4} --subtitle {XXX.vtt}
 ```
 
 replace {XXX.mpt} with the .mp4 file you need to operate, and replace {XXX.vtt} with the subtitle need to be merged. 
+
+## to split mp4 file to pieces.
+For videos longer than 20 mins, there may occurs error for some stt tools that subtitles are keeping outputing one single sentence. To solve this problem,
+cut.py can be used to split long video to pieces of shorter videos. Use:
+
+```
+python cut.py --video {XXX.mp4} --n {number_pieces:int}
+```
+where n is the number of pieces.
+
+Then call merge.py to merge subtitles to pieces of videos, and then call concat.py to get a full video:
+
+```
+python concat.py --video1 {XXX1.mp4} --video2 {XXX2.mp4} --output {XXX.mp4}
+```
+
+## to extract the frames of mp4 file 
+
+```
+python extract_frames.py --file {XXX.mp4} --save_file {XXX.rar}
+```
